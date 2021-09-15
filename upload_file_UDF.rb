@@ -10,7 +10,8 @@ File.open("./file.csv") do |csv| #enter filepath and file name
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-:password=>$pw,
+#:password=>$pw,
+:auth_token=>$token,
 :method=>'upload_file_udf', 
 :file=>UploadIO.new(csv, "text", "file.csv"),
 :id=>'22222',

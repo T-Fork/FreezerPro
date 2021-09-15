@@ -1,5 +1,6 @@
 #gen_token
-#genereates auth_token which can be used for continous imports. Will prevent audit log flooding.
+#generates auth_token which can be used for continous imports. Will prevent audit log flooding.
+#use this method first before calling e.g. import functions.
 require 'rubygems'
 require 'net/http'
 require 'json'
@@ -19,10 +20,15 @@ end
 data = JSON.load(res.body)
 #puts data
 token = data.to_s
-$token = token [16, 36]
-puts token #use this method first before calling import functions.
+#puts token
 
+if token == '{"error"=>true, "message"=>"Authentication Failed", "success"=>false}'
+    puts 'Username or password incorrect'
+    puts '## No token created ##'
+    abort
+end
+
+$token = token [16, 36]
+#
 #\code
-   
-puts "\n"
-puts "## Script finished ##"  
+puts "## Token created ##"

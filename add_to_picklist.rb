@@ -16,8 +16,9 @@ require 'net/http/post/multipart'
 
 url = URI.parse('http://130.238.229.22/api')
 req = Net::HTTP::Post::Multipart.new url.path,
-:username=>$user, 
-:password=>$pw,
+:username=>$user,
+#:password=>$pw,
+:auth_token=>$token,
 :method=>'add_to_picklist',
 :picklist_name=>'Api_testpicklist', #name of the picklist
 #:picklist=>'2', #optional, internal id of a picklist

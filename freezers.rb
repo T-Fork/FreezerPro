@@ -6,10 +6,10 @@ require 'net/http'
 require 'net/http/post/multipart'
 
 url = URI.parse('http://130.238.229.22/api')
-
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-:password=>$pw,
+#:password=>$pw,
+:auth_token=>$token,
 :method=>'freezers'
 
 res = Net::HTTP.start(url.host, url.port) do |http|
@@ -28,6 +28,6 @@ data = JSON.load(res.body)
         end
     end
 puts "\n"
-puts "## Script finished ##" 
+puts "## Finished listing freezers ##" 
 total = data['Total']   
 puts "Objects found: #{total}"

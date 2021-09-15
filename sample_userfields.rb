@@ -11,7 +11,8 @@ url = URI.parse('http://130.238.229.22/api')
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-:password=>$pw,
+#:password=>$pw,
+:auth_token=>$token,
 :method=>'sample_userfields', 
 :id=>'id' #change id value to the sample to be viewed.
 

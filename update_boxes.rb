@@ -14,7 +14,8 @@ File.open("./file.csv") do |csv|
 
 req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "file.csv"),
 :username=>$user,
-:password=>$pw,
+#:password=>$pw,
+:auth_token=>$token,
 :method=>'update_boxes',
 :id=>'259' 
 :background_job=>'true'

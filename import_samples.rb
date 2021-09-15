@@ -15,7 +15,8 @@ File.open("./file.csv") do |csv| #enter filepath and file name
 
 req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "file.csv"),
 :username=>$user,
-:password=>$pw,
+#:password=>$pw,
+:auth_token=>$token,
 :method=>'import_samples', 
 #:box_path=>'Freezername, Level 1, Box 1' #will override path set in csv
 #,:sample_type=>'text' #name of sample type import, otherwise the csv should contain this column
