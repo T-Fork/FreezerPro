@@ -6,7 +6,7 @@ require 'net/http'
 require 'json'
 require 'net/http/post/multipart'
 
-url = URI.parse('http://130.238.229.22/api')
+url = $url
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,

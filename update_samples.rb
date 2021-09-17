@@ -6,7 +6,7 @@ require 'json'
 require 'net/http/post/multipart'
 require 'csv'
 
-url = URI.parse('http://130.238.229.22/api')
+url = $url
 job_id = nil
 data = nil
 File.open(".\csv\test.csv") do |csv|

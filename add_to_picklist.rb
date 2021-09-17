@@ -14,7 +14,7 @@ require 'net/http/post/multipart'
 #custom_ids=>'text'
 #vials_ids=>'value'
 
-url = URI.parse('http://130.238.229.22/api')
+url = $url
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
 #:password=>$pw,

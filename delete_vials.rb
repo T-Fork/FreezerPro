@@ -5,7 +5,7 @@ require 'net/http'
 require 'json'
 require 'net/http/post/multipart'
 
-url = URI.parse('http://130.238.229.22/api')
+url = $url
 #json = {:tags=>['value1,value2,value3'],:type=>:barcode_tags}
 json = {:tags=>['1086833'],:type=>:barcode_tags}
 req = Net::HTTP::Post::Multipart.new url.path,

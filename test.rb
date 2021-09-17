@@ -1,33 +1,36 @@
-#Get_freezers
-#returns the total amount of freezers with id, name and description.
+#sample source types
+#Print the number of sample source types and related info
 require 'rubygems'
 require 'json'
 require 'net/http'
 require 'net/http/post/multipart'
 
-url = URI.parse('http://130.238.229.22/api')
+url = $url
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
 #:password=>$pw,
 :auth_token=>$token,
-:method=>'freezers'
+:method=>'sample_source_types',
+:query=>'MROS'
 
 res = Net::HTTP.start(url.host, url.port) do |http|
     http.request(req)
 end
 
+#code
 data = JSON.load(res.body)
-    data.each do |key,value|
-        if key == "Freezers"
-            value.each do |types|
-                puts "---------"
-                types.each do |k,v|
-                    puts (k.to_s + ": " + v.to_s)
-                end
+data.each do |key,value|
+    if key == "SampleSourceTypes"
+        value.each do |types|
+            puts "-----------"
+            types.each do |k,v|
+                puts (k.to_s + ": " + v.to_s)
             end
         end
     end
+end
+total = data['Total']
 puts "\n"
-puts "## Finished listing freezers ##" 
-total = data['Total']   
-puts "Objects found: #{total}"
+puts "----------"
+puts "Found: #{total}"
+

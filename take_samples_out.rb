@@ -9,7 +9,7 @@ require 'json'
 require 'net/http'
 require 'net/http/post/multipart'
 
-url = URI.parse('http://130.238.229.22/api')
+url = $url
 #":tags" are supplied as comma separated list, and rememeber to change ":type" to the correct tag_type
 json = {:tags=>['1086833,1086834,1086835,1086836,1086837,1086838,1086839,1086830,1086829,1086593'],
 :type=>:barcode_tags}
