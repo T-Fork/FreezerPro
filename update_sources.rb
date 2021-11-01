@@ -1,5 +1,14 @@
 #update sources
 #updates sources as specified by csv file
+=begin
+genereated reports state ID which needs to be changed to UID before import.
+to empty UDF field use double quotes "" 
+E.g.
+UID,(SC) Diagnosis OLD
+10497,""
+10498,""
+10499,"" 
+=end
 
 require 'rubygems'
 require 'net/http'
@@ -10,7 +19,7 @@ require 'csv'
 url = $url
 job_id = nil
 data = nil
-File.open("./csv/test.csv") do |csv|
+File.open("./csv/test.csv") do |csv| 
 
 req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "test.csv"),
 :username=>$user,
@@ -28,7 +37,7 @@ data = JSON.load(res.body)
 $get_status_from_job_id = data["job_id"]
 #puts data.inspect
 end
-#\code
+require_relative "get_job_status.rb"
    
 #puts "\n"
 #puts "## Script finished ##" 

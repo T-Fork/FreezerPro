@@ -16,8 +16,8 @@ while $password == ""
     $password = gets.chomp
 end
 =end
-$user = 'text'
-$password = 'text'
+$user = 'hvestin'
+$password = 'Po00GEop'
 $url = URI.parse('http://130.238.229.21/api') #ip to FP prod
 #$url = URI.parse('https://freezerpro-test.regionuppsala.se/signin') #ip to FP test.
 
@@ -27,7 +27,4 @@ require_relative "gen_token.rb"
 require_relative "update_sources.rb"
 
 #require_relative "test.rb"
-
-require_relative "get_job_status.rb"
-
-#REMOVE_UDF_VALUE
+#REMOVE_UDF_VALUES
