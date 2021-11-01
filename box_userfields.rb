@@ -9,7 +9,7 @@ url = $url
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-#:password=>$pw,
+#:password=>$password,
 :auth_token=>$token,
 :method=>'box_userfields', 
 :id=>'4053' #substitute number for desired box

@@ -16,7 +16,7 @@ json = {:tags=>['1086833,1086834,1086835,1086836,1086837,1086838,1086839,1086830
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-#:password=>$pw,
+#:password=>$password,
 :auth_token=>$token,
 :method=>'take_samples_out',
 :json=>json.to_json

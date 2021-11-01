@@ -11,7 +11,7 @@ url = $url
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-#:password=>$pw,
+#:password=>$password,
 :auth_token=>$token,
 :method=>'sample_types'
 

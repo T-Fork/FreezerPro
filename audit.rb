@@ -18,10 +18,11 @@ url = $url
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-#:password=>$pw,
+#:password=>$password,
 :auth_token=>$token,
-:method=>'audit'
-#, date_flag=>'all'
+:method=>'audit',
+:date_flag=>'all',
+#:dir=>'ASC'
 #, date_flag=>'date from,date to'  
    
 res = Net::HTTP.start(url.host, url.port) do |http|   

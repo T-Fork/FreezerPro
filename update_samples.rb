@@ -13,7 +13,7 @@ File.open(".\csv\test.csv") do |csv|
 
 req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "test.csv"),
 :username=>$user,
-#:password=>$pw,
+#:password=>$password,
 :auth_token=>$token,
 :method=>'update_samples',
 :background_job=>'true'

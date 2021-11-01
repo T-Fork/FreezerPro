@@ -10,7 +10,7 @@ url = $url
 json = {:tags=>['1086833'],:type=>:barcode_tags}
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-#:password=>$pw,
+#:password=>$password,
 :auth_token=>$token,
 :method=>'delete_vials',
 :json=>json.to_json,

@@ -9,9 +9,9 @@ url = $url
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-#:password=>$pw,
+#:password=>$password,
 :auth_token=>$token,
-:method=>'freezer_samples', 
+:method=>'freezer_samples',
 :id=>'7716' #substitute number for desired freezer
 
 res = Net::HTTP.start(url.host, url.port) do |http|

@@ -6,11 +6,11 @@ require 'net/http'
 require 'net/http/post/multipart'
 
 url = $url
-File.open("./file.csv") do |csv| #enter filepath and file name
+File.open("./csv/file.csv") do |csv| #enter filepath and file name
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-#:password=>$pw,
+#:password=>$password,
 :auth_token=>$token,
 :method=>'upload_file_udf', 
 :file=>UploadIO.new(csv, "text", "file.csv"),

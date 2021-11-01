@@ -1,4 +1,6 @@
+
 require 'net/http'
+=begin 
 print "Enter username: "
 $user = gets.chomp
 while $user == ""
@@ -13,10 +15,19 @@ while $password == ""
     puts "Enter password: "
     $password = gets.chomp
 end
-$url = URI.parse('http://130.238.229.22/api') #change ip to the one corresponding to prod or test.
+=end
+$user = 'text'
+$password = 'text'
+$url = URI.parse('http://130.238.229.21/api') #ip to FP prod
+#$url = URI.parse('https://freezerpro-test.regionuppsala.se/signin') #ip to FP test.
 
-#call gen_token first before calling i.e. import functions
+#call gen_token first before calling e.g. import functions
 require_relative "gen_token.rb"
 
-#create loop or statement
-require_relative "test.rb"
+require_relative "update_sources.rb"
+
+#require_relative "test.rb"
+
+require_relative "get_job_status.rb"
+
+#REMOVE_UDF_VALUE

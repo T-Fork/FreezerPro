@@ -1,36 +1,34 @@
-#sample source types
-#Print the number of sample source types and related info
+#update sources
+#updates sources as specified by csv file
+
 require 'rubygems'
-require 'json'
 require 'net/http'
+require 'json'
 require 'net/http/post/multipart'
+require 'csv'
 
 url = $url
-req = Net::HTTP::Post::Multipart.new url.path,
+job_id = nil
+data = nil
+File.open("./csv/test.csv") do |csv|
+
+req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "test.csv"),
 :username=>$user,
-#:password=>$pw,
+#:password=>$password,
 :auth_token=>$token,
-:method=>'sample_source_types',
-:query=>'MROS'
+:method=>'update_sources', 
+:sample_source_type=>'(SC) OTHERS', #enter sample source type to change
+:background_job=>'true'
 
 res = Net::HTTP.start(url.host, url.port) do |http|
     http.request(req)
 end
-
 #code
 data = JSON.load(res.body)
-data.each do |key,value|
-    if key == "SampleSourceTypes"
-        value.each do |types|
-            puts "-----------"
-            types.each do |k,v|
-                puts (k.to_s + ": " + v.to_s)
-            end
-        end
-    end
+$get_status_from_job_id = data["job_id"]
+#puts data.inspect
 end
-total = data['Total']
-puts "\n"
-puts "----------"
-puts "Found: #{total}"
-
+#\code
+   
+#puts "\n"
+#puts "## Script finished ##" 
