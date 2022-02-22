@@ -1,3 +1,4 @@
 # FreezerPro API
-Use the main.rb to call desired functions.
+Function library to make API calls to Azenta FreezerPro LIMS
+
 
