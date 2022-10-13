@@ -1,6 +1,6 @@
 #Delete_vials
 #deletes vials that are stated by providing a tag
-require 'rubygems'
+
 require 'net/http'
 require 'json'
 require 'net/http/post/multipart'
@@ -10,7 +10,7 @@ url = $url
 json = {:tags=>['1086833'],:type=>:barcode_tags}
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-#:password=>$password,
+#:password=>$pw,
 :auth_token=>$token,
 :method=>'delete_vials',
 :json=>json.to_json,
@@ -21,7 +21,7 @@ req = Net::HTTP::Post::Multipart.new url.path,
 :comment=>"API test"
 #proivde atleast one rfid tag, barcode tag, custom id or vial id. Comma separated list accepted
 
-res = Net::HTTP.start(url.host, url.port) do |http|
+res = Net::HTTP.start(url.host, url.port, :use_ssl => true, :ssl_server_name => url.host, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
     http.request(req)
 end
 #code

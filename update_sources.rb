@@ -1,16 +1,8 @@
 #update sources
-#updates sources as specified by csv file
-=begin
-genereated reports state ID which needs to be changed to UID before import.
-to empty UDF field use double quotes "" 
-E.g.
-UID,(SC) Diagnosis OLD
-10497,""
-10498,""
-10499,"" 
-=end
+#Updates a sample source or set of sample sources via CSV.file. UDFs may be added by adding them as a column in the CSV file. 
+#Note: All UDFs must be present in the CSV file and the file must contain the sample source UID, Barcode, or RFID tag. 
 
-require 'rubygems'
+
 require 'net/http'
 require 'json'
 require 'net/http/post/multipart'
@@ -19,17 +11,19 @@ require 'csv'
 url = $url
 job_id = nil
 data = nil
-File.open("./csv/test.csv") do |csv| 
+#File.open("./csv/221011_conservative_treatment_test.csv") do |csv|
+File.open("./csv/221011_conservative_treatment_test.csv") do |csv|
 
-req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "test.csv"),
+req = Net::HTTP::Post::Multipart.new url.path, 
+:file=>UploadIO.new(csv, "text", "221011_conservative_treatment_test.csv"),
 :username=>$user,
-#:password=>$password,
+#:password=>$pw,
 :auth_token=>$token,
 :method=>'update_sources', 
-:sample_source_type=>'(SC) OTHERS', #enter sample source type to change
+#:sample_source_type=>'SC ICONSS', #enter sample source type to change
 :background_job=>'true'
 
-res = Net::HTTP.start(url.host, url.port) do |http|
+res = Net::HTTP.start(url.host, url.port, :use_ssl => true, :ssl_server_name => url.host, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
     http.request(req)
 end
 #code
@@ -37,7 +31,7 @@ data = JSON.load(res.body)
 $get_status_from_job_id = data["job_id"]
 #puts data.inspect
 end
-require_relative "get_job_status.rb"
+#\code
    
 #puts "\n"
 #puts "## Script finished ##" 

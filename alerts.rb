@@ -1,7 +1,7 @@
 #alerts
 # returns the active sample alerts
 
-require 'rubygems'
+
 require 'net/http'
 require 'json'
 require 'net/http/post/multipart'
@@ -10,11 +10,11 @@ url = $url
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
-#:password=>$password,
+#:password=>$pw,
 :auth_token=>$token,
 :method=>'alerts'
 
-res = Net::HTTP.start(url.host, url.port) do |http|
+res = Net::HTTP.start(url.host, url.port, :use_ssl => true, :ssl_server_name => url.host, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
     http.request(req)
 end
 

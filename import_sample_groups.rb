@@ -1,6 +1,6 @@
-#update_samples
-#Updates a sample or set of samples via CSV.file. UDFs may be added by adding them as a column in the CSV file. 
-#Note: All UDFs must be present in the CSV file and the file must contain the sample unique ID, Barcode, or RFID tag. 
+#import_sample_group
+#import sample groups as specified in csv file
+
 
 require 'net/http'
 require 'json'
@@ -10,13 +10,13 @@ require 'csv'
 url = $url
 job_id = nil
 data = nil
-File.open(".\csv\test.csv") do |csv|
+File.open("./file.csv") do |csv|
 
-req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "test.csv"),
+req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "file.csv"),
 :username=>$user,
 #:password=>$pw,
 :auth_token=>$token,
-:method=>'update_samples',
+:method=>'import_sample_groups',
 :background_job=>'true'
 
 res = Net::HTTP.start(url.host, url.port, :use_ssl => true, :ssl_server_name => url.host, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|

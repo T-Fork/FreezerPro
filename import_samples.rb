@@ -2,7 +2,7 @@
 #import samples as specified by csv file
 #Importfile should contain a sample type column, boxpath column
 
-require 'rubygems'
+
 require 'net/http'
 require 'json'
 require 'net/http/post/multipart'
@@ -15,7 +15,7 @@ File.open("./file.csv") do |csv| #enter filepath and file name
 
 req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "file.csv"),
 :username=>$user,
-#:password=>$password,
+#:password=>$pw,
 :auth_token=>$token,
 :method=>'import_samples', 
 #:box_path=>'Freezername, Level 1, Box 1' #will override path set in csv
@@ -26,12 +26,12 @@ req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", 
 :next_box=>'true', #if set to true the import will continue on the next box in the freezer tree
 :background_job=>'true'
 
-res = Net::HTTP.start(url.host, url.port) do |http|
+res = Net::HTTP.start(url.host, url.port, :use_ssl => true, :ssl_server_name => url.host, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
     http.request(req)
 end
 #code
 data = JSON.load(res.body)
-job_id = data ["job_id"]
+$get_status_from_job_id = data["job_id"]
 puts data.inspect
 end
 #\code

@@ -1,30 +1,40 @@
-
+#$LOAD_PATH << '\menu_files\' #
+#Dir[File.join(__dir__, 'lib', '*.rb')].each { |file| require file }
 require 'net/http'
-=begin 
-print "Enter username: "
-$user = gets.chomp
-while $user == ""
-    puts "No username provided"
-    puts "Enter username: "
-    $user = gets.chomp
+require_relative '.\menu_files\set_server'
+require_relative '.\menu_files\credentials'
+#require_relative '.\menu_files\main_menu'
+#puts 'br1 in main' #used during testing
+include Set_Server
+include Credentials
+#include Main_Menu
+
+
+#set_server
+set_to_test
+#set_to_prod
+$url = $current_server
+puts "Current server is #{$menu_print}"
+variable_credentials
+#static_credentials
+puts "Logging in as #{$user}" #{$user} and #{$password}"
+require_relative 'gen_token'
+#puts 'br2 in main.rb' #used during testing
+#main_ui
+require_relative 'update_sources'
+
+
+
+
+
+
+puts "Waiting 5s before asking for job status."
+#
+timer = 5
+while timer != 1
+    puts timer
+    sleep(1)
+    timer -= 1
 end
-print "Enter password: "
-$password = gets.chomp
-while $password == ""
-    puts "No password provided"
-    puts "Enter password: "
-    $password = gets.chomp
-end
-=end
-$user = 'hvestin'
-$password = 'Po00GEop'
-$url = URI.parse('http://130.238.229.21/api') #ip to FP prod
-#$url = URI.parse('https://freezerpro-test.regionuppsala.se/signin') #ip to FP test.
+require_relative 'get_job_status' #get_job_status keeps looping while status == 3 (working) is reported and to break if status != 3.
 
-#call gen_token first before calling e.g. import functions
-require_relative "gen_token.rb"
-
-require_relative "update_sources.rb"
-
-#require_relative "test.rb"
-#REMOVE_UDF_VALUES
