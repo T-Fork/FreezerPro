@@ -1,5 +1,5 @@
 #vials_import
-#returns informationon a job specified by id
+#returns informationon about vials imported by import_samples method specified job-ID
 #:query=>'text'
 
 
@@ -12,7 +12,7 @@ req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
 #:password=>$pw,
 :auth_token=>$token,
-:method=>'import', 
+:method=>'vials_import', 
 :job_id=>'importers:import:16s541a616a' #enter value for job ID
 #, query=>'text'
 

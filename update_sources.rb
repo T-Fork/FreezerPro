@@ -11,11 +11,11 @@ require 'csv'
 url = $url
 job_id = nil
 data = nil
-#File.open("./csv/221011_conservative_treatment_test.csv") do |csv|
-File.open("./csv/221011_conservative_treatment_test.csv") do |csv|
-
+filename = '221011_pain_test'
+File.open("./csv/#{filename}.csv") do |csv|
+#puts "Filename is : #{filename}"
 req = Net::HTTP::Post::Multipart.new url.path, 
-:file=>UploadIO.new(csv, "text", "221011_conservative_treatment_test.csv"),
+:file=>UploadIO.new(csv, "text", filename),
 :username=>$user,
 #:password=>$pw,
 :auth_token=>$token,
@@ -31,7 +31,3 @@ data = JSON.load(res.body)
 $get_status_from_job_id = data["job_id"]
 #puts data.inspect
 end
-#\code
-   
-#puts "\n"
-#puts "## Script finished ##" 

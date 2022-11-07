@@ -10,9 +10,11 @@ require 'csv'
 url = $url
 job_id = nil
 data = nil
-File.open(".\csv\test.csv") do |csv|
+filename = "test"
+File.open("./csv/#{filename}.csv") do |csv|
 
-req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "test.csv"),
+req = Net::HTTP::Post::Multipart.new url.path, 
+:file=>UploadIO.new(csv, "text", filename),
 :username=>$user,
 #:password=>$pw,
 :auth_token=>$token,

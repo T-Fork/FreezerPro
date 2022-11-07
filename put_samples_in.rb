@@ -10,8 +10,17 @@ require 'net/http'
 require 'net/http/post/multipart'
 
 url = $url
+###it would better to read a csv-file containing barcode/rfid/custom_id###
+=begin 
+filename = "test"
+File.open("./csv/#{filename}.csv") do |csv|
 
-json = {:tags=>['1086833,1086834,1086835,1086836,1086837,1086838,1086839,1086830,1086829,1086593'],:type=>:barcode_tags}
+req = Net::HTTP::Post::Multipart.new url.path, 
+:file=>UploadIO.new(csv, "text", filename),
+=end
+#":tags" are supplied as comma separated list
+json = {:tags=>['1086833,1086834,1086835,1086836,1086837,1086838,1086839,1086830,1086829,1086593'],
+:type=>:barcode_tags}
 
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,

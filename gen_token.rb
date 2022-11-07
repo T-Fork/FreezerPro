@@ -1,8 +1,8 @@
 #gen_token
 #generates auth_token which can be used for continous imports. Will prevent audit log flooding.
 #use this method first before calling e.g. import functions.
-#
-#require 'net/http'
+
+require 'net/http'
 require 'json'
 require 'net/http/post/multipart'
 
@@ -17,9 +17,9 @@ res = Net::HTTP.start(url.host, url.port, :use_ssl => true, :ssl_server_name => 
 end
 #code
 data = JSON.load(res.body)
-#puts data
+#puts data ###used during dev###
 token = data.to_s
-#puts token
+#puts token ###used during dev###
 
 if token == '{"error"=>true, "message"=>"Authentication Failed", "success"=>false}'
     puts 'Username or password incorrect'
@@ -28,7 +28,7 @@ if token == '{"error"=>true, "message"=>"Authentication Failed", "success"=>fals
     abort
 end
 
-$token = token [16, 36]
-#
-#\code
+ blipp = token [16, 36]
+ $token = "#{blipp}"
+
 puts "## Token created ##"

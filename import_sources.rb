@@ -1,6 +1,9 @@
 #import_sources
 #imports sources as specified by csv file
-
+#Name,Description,Blood Type
+#Source1,Descr 1,Plus
+#Source2,Descr 2,Plus
+#Source3,Descr 3,Minus
 
 require 'net/http'
 require 'json'
@@ -10,9 +13,11 @@ require 'csv'
 url = $url
 job_id = nil
 data = nil
-File.open("./file.csv") do |csv|
+filename = "test"
+File.open("./csv/#{filename}.csv") do |csv|
 
-req = Net::HTTP::Post::Multipart.new url.path, :file=>UploadIO.new(csv, "text", "file.csv"),
+req = Net::HTTP::Post::Multipart.new url.path, 
+:file=>UploadIO.new(csv, "text", filename),
 :username=>$user,
 #:password=>$pw,
 :auth_token=>$token,
