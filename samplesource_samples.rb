@@ -1,4 +1,4 @@
-#samplessource_samples
+#samplesource_samples
 #returns a list of samples from a source specified by id
 #:query=>'text' optional search string
 
