@@ -1,31 +1,34 @@
 #Delete_vials
-#deletes vials that are stated by providing a tag
+#deletes vials that are stated by providing atleast one rfid tag,
+#barcode tag, custom id or vial id. Comma separated list accepted
 
 require 'net/http'
 require 'json'
+require 'csv'
 require 'net/http/post/multipart'
 
 url = $url
-#json = {:tags=>['value1,value2,value3'],:type=>:barcode_tags}
-json = {:tags=>['1086833'],:type=>:barcode_tags}
+#job_id = nil
+#data = nil
+
+filename = "test"
+file = File.read("./csv/#{filename}.csv").split
+dummy_BC = file.join(',')
+#puts dummy_BC
 req = Net::HTTP::Post::Multipart.new url.path,
 :username=>$user,
 #:password=>$pw,
 :auth_token=>$token,
 :method=>'delete_vials',
-:json=>json.to_json,
 #:rfid_tags=>"355AB1CBC0000010000067D6,355AB1CBC000001000006292",
-#:barcode_tags=>"1026556,1026590",
 #:custom_ids=>"Cell Line_26576,Bacteria_26554",
+:barcode_tags=>"#{dummy_BC}",
 #:vial_id=>"12345,98765",
-:comment=>"API test"
-#proivde atleast one rfid tag, barcode tag, custom id or vial id. Comma separated list accepted
+:comment=>"Jira UBB-1133"
 
 res = Net::HTTP.start(url.host, url.port, :use_ssl => true, :ssl_server_name => url.host, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
     http.request(req)
 end
-#code
-
-str = res.body
-#puts str
-#/code
+data = JSON.load(res.body)
+$get_status_from_job_id = data["job_id"]
+puts data.inspect
